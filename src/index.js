@@ -6,13 +6,12 @@ const refs = {
 };
 const filmAPI = new FetchAPI(refs.searchText);
 
-filmAPI.mainPageFetch();
+filmAPI.mainPageRequest();
 
-filmAPI.mainPageFetch(3);
+filmAPI.mainPageRequest(3); // в параметрах передаэмо номер сторінки
 
 function onSearch() {
-  console.dir(refs.text);
-  filmAPI.searchForNameFetch(refs.text.value.trim());
+  filmAPI.searchForName(refs.text.value.trim());
 }
 
 refs.SearchBtn.addEventListener('click', onSearch);

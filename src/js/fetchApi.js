@@ -7,6 +7,7 @@ export default class FetchAPI {
     this.searchText = '';
     this.mainSearchString = `https://api.themoviedb.org/3/trending/movie/week?api_key=${this.API_KEY}`;
     this.forNameSearchString = `https://api.themoviedb.org/3/search/movie?api_key=${this.API_KEY}`;
+    this.genresListSearchString = `https://api.themoviedb.org/3/genre/movie/list?api_key=${this.API_KEY}`;
     this.currentPage = 1;
   }
 
@@ -39,11 +40,24 @@ export default class FetchAPI {
 
   //  запит повної інфи по ID
   async searchForId(filmId) {
-    const searchString = `https://api.themoviedb.org/3/movie/${filmId}?api_key=${this.API_KEY}`;
+    const idSearchString = `https://api.themoviedb.org/3/movie/${filmId}?api_key=${this.API_KEY}`;
 
-    const response = await axios.get(searchString);
+    const response = await axios.get(idSearchString);
 
     console.dir(response);
     return response;
+  }
+
+  //  запит на список жанрів
+
+  async getGenre(genreId) {
+    const response = await axios.get(this.genresListSearchString); //`https://api.themoviedb.org/3/genre/movie/list?api_key=${this.API_KEY}`
+    const genre = response.data.genres.filter(({ id }) => {
+      if (id === genreId) {
+        return true;
+      }
+    });
+
+    return genre[0].name;
   }
 }

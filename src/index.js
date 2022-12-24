@@ -15,3 +15,5 @@ function onSearch() {
 }
 
 refs.SearchBtn.addEventListener('click', onSearch);
+
+filmAPI.getGenre(16);
